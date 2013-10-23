@@ -18,3 +18,5 @@ server.on 'ready', ->
         console.log 'matched pogoda', match[1]
         pogoda match[1], (res)->
           channel.send res
+
+module.exports = server
