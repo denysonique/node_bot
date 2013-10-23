@@ -9,6 +9,7 @@
   "author": "",
   "license": "BSD-2-Clause",
   "dependencies": {
+    "coffee-script": "1.6.3",
     "cheerio": "~0.12.3",
     "irc-js": "~2.0.0-beta.3"
   }
