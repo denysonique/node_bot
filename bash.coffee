@@ -13,8 +13,10 @@ bash = (cb)->
     $ = cheerio.load body.toString()
 
     html =  $('.quote').html().replace(/<br>/gm, '\n')
+    html =  $('.quote').html()
     $box = $('<div>')
     $box.append html
+    text = $box.text()
     text = $box.text().replace(/^\s+/, '').replace(/\s+$/mg,'')
 
     if text.split('\n').length <= 3
@@ -25,8 +27,3 @@ bash = (cb)->
 
 
 module.exports = bash
-
-
-
-
-
