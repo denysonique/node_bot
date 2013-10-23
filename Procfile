@@ -1,1 +1,1 @@
-worker: coffee main.coffee
+web: coffee main.coffee
