@@ -1,0 +1,15 @@
+{
+  "name": "irc-bot",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "cheerio": "~0.12.3",
+    "irc-js": "~2.0.0-beta.3"
+  }
+}
