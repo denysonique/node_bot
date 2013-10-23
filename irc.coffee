@@ -5,10 +5,10 @@ class Channel extends EventEmitter
   constructor: (@name, @server)->
     @server.socket.on 'line', (data)=>
       data = data.toString()
-      regex = new RegExp ".* PRIVMSG #{@name} :\(.*\)"
+      regex = new RegExp ":\(.*\)!.* PRIVMSG #{@name} :\(.*\)"
       match = data.match regex
       if match
-        @emit 'message', match[1]
+        @emit 'message', match[2], match[1]
 
   send: (msg)=>
     @server.socket.writeln "PRIVMSG #{@name} :#{msg}"
