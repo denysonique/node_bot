@@ -41,6 +41,12 @@ register_plugins = (channel)->
     if match
       geoip match[1], channel.server, (res)-> channel.send "#{from}: #{res}"
 
+    match = msg.match /^;whois (.*)/
+    if match
+      channel.server.whois match[1], (res)->
+        console.log res.host
+        channel.send "#{from}: #{res.host}"
+
 server = new Server nick: 'node_bot', server: 'irc.freenode.net'
 
 server.connect()
@@ -48,8 +54,4 @@ server.on 'ready', ->
   #server.join '#node.js-pl', register_plugins
   #server.join '#gentoo-pl', register_plugins
   server.join '#irctesting', register_plugins
-  server.whois 'dennis', console.log
-  server.whois 'dennis', console.log
-  server.whois 'dennis', console.log
-
 module.exports = server
