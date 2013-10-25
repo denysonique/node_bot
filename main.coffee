@@ -42,7 +42,12 @@ register_plugins = (channel)->
     if match
       geoip match[1], channel.server, (res)-> channel.send "#{from}: #{res}"
 
-server = new Server nick: 'node_bot', server: 'irc.freenode.net'
+if process.env.NODE_ENV == 'development'
+  host = 'localhost'
+else
+  host = 'irc.freenode.net'
+
+server = new Server nick: 'node_bot', server: host
 
 server.connect()
 server.on 'ready', ->
