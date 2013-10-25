@@ -1,6 +1,6 @@
 net            = require 'net'
 {EventEmitter} = require 'events'
-channel        = require './irc/channel'
+Channel        = require './channel'
 
 class Server extends EventEmitter
 
