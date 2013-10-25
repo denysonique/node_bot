@@ -44,6 +44,7 @@ class Server extends EventEmitter
     whois = line.match regex
     if whois
       @emit 'whois', nick: whois[1], host: whois[2]
+      console.log 'whois matched: ', whois
     if ping
       @emit 'ping', ping[1]
 
