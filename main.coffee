@@ -4,6 +4,7 @@ java = require './java'
 bash = require './bash'
 twitter = require './twitter'
 builtwith = require './builtwith'
+geoip = require './geoip'
 
 http = require 'http'
 
@@ -36,6 +37,10 @@ register_plugins = (channel)->
     if match
       builtwith match[1], (res)-> channel.send "#{from}: #{res}"
 
+    match = msg.match /^;geoip (.*)/
+    if match
+      geoip match[1], channel.server, (res)-> channel.send "#{from}: #{res}"
+
 server = new Server nick: 'node_bot', server: 'irc.freenode.net'
 
 server.connect()
@@ -43,5 +48,8 @@ server.on 'ready', ->
   server.join '#node.js-pl', register_plugins
   server.join '#gentoo-pl', register_plugins
   server.join '#irctesting', register_plugins
+  server.whois 'dennis', console.log
+  server.whois 'dennis', console.log
+  server.whois 'dennis', console.log
 
 module.exports = server

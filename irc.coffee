@@ -40,13 +40,10 @@ class Server extends EventEmitter
     regex = new RegExp "PING \(.*\)"
     ping = line.match regex
 
-# :irc.example.net 311 node_bot dennis ~dennis localhost * :Unknown
-
-    regex = new RegExp ".* 311 .* \(.*\) .* \(.*\) \* .*"
+    regex = /.* 311 .* (.*) .* (.*) \* .*/
     whois = line.match regex
     if whois
       @emit 'whois', nick: whois[1], host: whois[2]
-      console.log whois
     if ping
       @emit 'ping', ping[1]
 
@@ -54,8 +51,6 @@ class Server extends EventEmitter
   handle_events: =>
     @on 'ping', (str)->
       @socket.writeln "PONG #{str}"
-    @on 'whois', (str)->
-      console.log 'whois', str
 
   connect: =>
     console.log 'connecting'
@@ -90,5 +85,9 @@ class Server extends EventEmitter
 
   whois: (nick, cb)=>
     @socket.writeln "WHOIS #{nick}"
+    @on 'whois', cback = (res)->
+      if res.nick == nick
+        cb res
+        @removeListener 'whois', cback
 
 module.exports = Server: Server
