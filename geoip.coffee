@@ -8,6 +8,7 @@ geoip = (nick, irc, cb)->
   nick = nick.toString()
 
   irc.whois nick, (res)->
+    console.log 'whois: ', res
 
     r.get "http://freegeoip.net/json/#{res.host}", (err, res, body)->
       if err || res.statusCode != 200
