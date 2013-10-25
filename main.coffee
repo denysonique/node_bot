@@ -1,4 +1,4 @@
-{Server} = require './irc'
+Server = require './irc/server'
 pogoda = require './weather'
 java = require './java'
 bash = require './bash'
