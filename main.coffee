@@ -37,7 +37,7 @@ register_plugins = (channel)->
     if match
       builtwith match[1], (res)-> channel.send "#{from}: #{res}"
 
-    match = msg.match /^;geoip (.*)/
+    match = msg.match /^;locate (.*)/
     if match
       geoip match[1], channel.server, (res)-> channel.send "#{from}: #{res}"
 
