@@ -1,11 +1,11 @@
 Server    = require './irc/server'
 
-pogoda    = require './weather'
-java      = require './java'
-bash      = require './bash'
-twitter   = require './twitter'
-builtwith = require './builtwith'
-geoip     = require './geoip'
+pogoda    = require './plugins/weather'
+java      = require './plugins/java'
+bash      = require './plugins/bash'
+twitter   = require './plugins/twitter'
+builtwith = require './plugins/builtwith'
+geoip     = require './plugins/geoip'
 
 http      = require 'http'
 
