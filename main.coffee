@@ -44,11 +44,15 @@ register_plugins = (channel)->
 
     match = msg.match /^;version/
     if match
-      channel.send "#{from} https://github.com/denysonique/node_bot"
+      channel.send "#{from}: https://github.com/denysonique/node_bot"
 
     match = msg.match /^;source/
     if match
-      channel.send "#{from} https://github.com/denysonique/node_bot"
+      channel.send "#{from}: https://github.com/denysonique/node_bot"
+
+    match = msg.match /^;windows/
+    if match
+      channel.send "#{from}: http://support.microsoft.com/kb/314458"
 
 if process.env.NODE_ENV == 'development'
   host = 'localhost'
