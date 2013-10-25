@@ -86,7 +86,7 @@ class Server extends EventEmitter
   whois: (nick, cb)=>
     @socket.writeln "WHOIS #{nick}"
     @on 'whois', cback = (res)->
-      if res.nick == nick
+      if res.nick.trim() == nick.trim()
         cb res
         @removeListener 'whois', cback
 
