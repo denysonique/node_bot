@@ -42,6 +42,14 @@ register_plugins = (channel)->
     if match
       geoip match[1], channel.server, (res)-> channel.send "#{from}: #{res}"
 
+    match = msg.match /^;version/
+    if match
+      channel.send "#{from} https://github.com/denysonique/node_bot"
+
+    match = msg.match /^;source/
+    if match
+      channel.send "#{from} https://github.com/denysonique/node_bot"
+
 if process.env.NODE_ENV == 'development'
   host = 'localhost'
 else
