@@ -5,10 +5,16 @@ class Channel extends EventEmitter
   constructor: (@name, @server)->
     @server.socket.on 'line', (data)=>
       data = data.toString()
+
       regex = new RegExp ":\(.*\)!.* PRIVMSG #{@name} :\(.*\)"
-      match = data.match regex
-      if match
-        @emit 'message', match[2], match[1]
+      privmsg = data.match regex
+
+
+      if privmsg
+        @emit 'message', privmsg[2], privmsg[1]
+
+    @server.on 'ping', (str)=>
+      @server.socket.writeln "PONG #{str}"
 
   send: (msg)=>
     @server.socket.writeln "PRIVMSG #{@name} :#{msg}"
@@ -26,20 +32,45 @@ class Server extends EventEmitter
       @settings =
         nick: 'ircbot'
         server: 'localhost'
+    @handle_events()
+
+  on_line: (line)=>
+    console.log "<< #{line}"
+  
+    regex = new RegExp "PING \(.*\)"
+    ping = line.match regex
+
+# :irc.example.net 311 node_bot dennis ~dennis localhost * :Unknown
+
+    regex = new RegExp ".* 311 .* \(.*\) .* \(.*\) \* .*"
+    whois = line.match regex
+    if whois
+      @emit 'whois', nick: whois[1], host: whois[2]
+      console.log whois
+    if ping
+      @emit 'ping', ping[1]
+
+
+  handle_events: =>
+    @on 'ping', (str)->
+      @socket.writeln "PONG #{str}"
+    @on 'whois', (str)->
+      console.log 'whois', str
 
   connect: =>
     console.log 'connecting'
     @socket = new net.Socket
     @socket.setEncoding('utf-8')
 
-    @socket.on 'line', (line)->
-      console.log line
+    @socket.on 'line', @on_line
 
     @socket.on 'data', (data)=>
       data.split('\n').forEach (line)=>
         @socket.emit 'line', line
 
-    @socket.writeln = (msg, cb)=> @socket.write("#{msg}\n", cb)
+    @socket.writeln = (msg, cb)=>
+      console.log ">> #{msg}"
+      @socket.write("#{msg}\n", cb)
 
     console.log @settings
     @socket.connect 6667, @settings.server
@@ -53,9 +84,11 @@ class Server extends EventEmitter
       cb(channel) if cb
 
   connected: =>
-    console.log 'connected'
     @socket.writeln "NICK #{@settings.nick}", =>
       @socket.writeln 'USER user foo hax :bar', =>
         @emit 'ready'
+
+  whois: (nick, cb)=>
+    @socket.writeln "WHOIS #{nick}"
 
 module.exports = Server: Server
