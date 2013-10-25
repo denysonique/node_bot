@@ -1,12 +1,13 @@
-Server = require './irc/server'
-pogoda = require './weather'
-java = require './java'
-bash = require './bash'
-twitter = require './twitter'
-builtwith = require './builtwith'
-geoip = require './geoip'
+Server    = require './irc/server'
 
-http = require 'http'
+pogoda    = require './weather'
+java      = require './java'
+bash      = require './bash'
+twitter   = require './twitter'
+builtwith = require './builtwith'
+geoip     = require './geoip'
+
+http      = require 'http'
 
 http.createServer((req, res)-> res.end()).listen process.env.PORT || 5000
 
