@@ -12,6 +12,8 @@
     "coffee-script": "1.6.3",
     "cheerio": "~0.12.3",
     "irc-js": "~2.0.0-beta.3",
-    "request": "~2.27.0"
+    "request": "~2.27.0",
+    "underscore": "~1.5.2",
+    "jquery": "~1.8.3"
   }
 }

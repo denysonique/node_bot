@@ -3,6 +3,7 @@ pogoda = require './weather'
 java = require './java'
 bash = require './bash'
 twitter = require './twitter'
+builtwith = require './builtwith'
 
 http = require 'http'
 
@@ -30,6 +31,10 @@ register_plugins = (channel)->
     match = msg.match /^;twitter (.*)/
     if match
       twitter match[1], (res)-> channel.send "#{from}: #{res}"
+
+    match = msg.match /^;builtwith (.*)/
+    if match
+      builtwith match[1], (res)-> channel.send "#{from}: #{res}"
 
 server = new Server nick: 'node_bot', server: 'irc.freenode.net'
 
