@@ -48,8 +48,5 @@ server.on 'ready', ->
   server.join '#node.js-pl', register_plugins
   server.join '#gentoo-pl', register_plugins
   server.join '#irctesting', register_plugins
-  server.whois 'dennis', console.log
-  server.whois 'dennis', console.log
-  server.whois 'dennis', console.log
 
 module.exports = server
