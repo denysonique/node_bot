@@ -7,6 +7,7 @@ twitter   = require './plugins/twitter'
 builtwith = require './plugins/builtwith'
 geoip     = require './plugins/geoip'
 rofl      = require './plugins/roflcopter.coffee'
+youtube   = require './plugins/youtube_title.coffee'
 
 http      = require 'http'
 
@@ -16,6 +17,8 @@ http.createServer((req, res)-> res.end()).listen process.env.PORT || 5000
 #TODO clear register_plugins mess
 
 register_plugins = (channel)->
+  youtube.register channel
+
   channel.on 'message', (msg, from)->
 
     match = msg.match /;pogoda (.*)/
