@@ -9,6 +9,7 @@ geoip     = require './plugins/geoip'
 rofl      = require './plugins/roflcopter.coffee'
 youtube   = require './plugins/youtube_title.coffee'
 sjp       = require './plugins/sjp'
+btc       = require './plugins/btc'
 
 http      = require 'http'
 
@@ -20,6 +21,7 @@ http.createServer((req, res)-> res.end()).listen process.env.PORT || 5000
 register_plugins = (channel)->
   youtube.register channel
   sjp.register channel
+  btc.register channel
 
   channel.on 'message', (msg, from)->
 
