@@ -26,7 +26,7 @@ execute = (cb)->
         cb text
       else
         if i >= 50
-          delay 200, -> rofl cb
+          delay 200, -> execute cb
         else
           get_rofl cb
 
