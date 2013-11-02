@@ -23,6 +23,7 @@ register_plugins = (channel)->
   sjp.register channel
   btc.register channel
   rofl.register channel
+  bash.register channel
 
   channel.on 'message', (msg, from)->
 
@@ -34,10 +35,6 @@ register_plugins = (channel)->
     match = msg.match /^;java/
     if match
       java (res)-> channel.send "#{from}: #{res}"
-
-    match = msg.match /^;bash/
-    if match
-      bash (res)-> channel.send "#{from}: #{res}"
 
     match = msg.match /^;twitter (.*)/
     if match
