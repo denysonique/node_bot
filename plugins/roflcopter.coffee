@@ -5,7 +5,7 @@ r = r.defaults followAllRedirects: true
 
 delay = (ms,cb)-> setTimeout cb, ms
 random = -> Math.floor(Math.random() * 14) + 1
-rofl = (cb)->
+execute = (cb)->
   r.get "http://roflcopter.pl/top/#{random()}", (err, res, body)->
     if err || res.statusCode != 200
       cb 'dupa'
@@ -32,7 +32,17 @@ rofl = (cb)->
 
     get_rofl cb
 
-module.exports = rofl
+register = (channel)->
+  channel.on 'message', (msg, from)->
+
+    match = msg.match /;(:?rot?fl|roflcopter)/
+    if match
+      execute (res)->
+        lines = res.split '\n'
+        for line in lines
+          channel.send "#{from}: #{line}"
+
+module.exports = register: register, execute: execute
 if require.main == module
-  rofl console.log
+  execute console.log
 

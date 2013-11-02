@@ -22,6 +22,7 @@ register_plugins = (channel)->
   youtube.register channel
   sjp.register channel
   btc.register channel
+  rofl.register channel
 
   channel.on 'message', (msg, from)->
 
@@ -61,10 +62,6 @@ register_plugins = (channel)->
     match = msg.match /^;windows/
     if match
       channel.send "#{from}: http://support.microsoft.com/kb/314458"
-
-    match = msg.match /^;rot?fl/
-    if match
-      rofl (res)-> channel.send "#{from}: #{res}"
 
 if process.env.NODE_ENV == 'development'
   host = 'localhost'
