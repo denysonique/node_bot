@@ -1,6 +1,8 @@
-r = require 'request'
-r = r.defaults followRedirect: false, followAllRedirects: false
+r    = require 'request'
 http = require 'http'
+util = require '../util'
+
+r = r.defaults followRedirect: false, followAllRedirects: false
 execute = (url, cb)->
   unless url.match /^https?:[/][/]/
     url = "http://#{url}"
@@ -30,6 +32,7 @@ register = (channel)->
     if match
       execute match[1], (lines)->
         for line in lines
+          line = util.format(line)
           channel.send "#{from}: #{line}"
 
 module.exports = register: register, execute: execute
