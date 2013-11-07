@@ -14,10 +14,12 @@ execute = (url, cb)->
     code_desc = http.STATUS_CODES[res.statusCode] || ''
     res_array.push "*HTTP/#{res.httpVersion} #{res.statusCode} #{code_desc}*"
     for k, v of res.headers
-      res_array.push "*#{k.trim()}:* #{v.trim()}"
+      res_array.push "*#{k.toString().trim()}:* #{v.toString().trim()}"
 
     res = res_array.join ' | '
-    cb res
+
+    lines = res.match /.{1,400}/g
+    cb lines
 
 
 register = (channel)->
@@ -26,8 +28,9 @@ register = (channel)->
     match = msg.match /^;head(?:ers)? (.*)$/
 
     if match
-      execute match[1], (res)->
-        channel.send "#{from}: #{res}"
+      execute match[1], (lines)->
+        for line in lines
+          channel.send "#{from}: #{line}"
 
 module.exports = register: register, execute: execute
 if require.main == module
