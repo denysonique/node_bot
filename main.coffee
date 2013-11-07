@@ -10,6 +10,7 @@ rofl      = require './plugins/roflcopter.coffee'
 youtube   = require './plugins/youtube_title.coffee'
 sjp       = require './plugins/sjp'
 btc       = require './plugins/btc'
+mario     = require './plugins/mario'
 
 http      = require 'http'
 
@@ -24,6 +25,7 @@ register_plugins = (channel)->
   btc.register channel
   rofl.register channel
   bash.register channel
+  mario.register channel
 
   channel.on 'message', (msg, from)->
 
