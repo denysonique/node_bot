@@ -2,7 +2,7 @@ r = require 'request'
 
 register = (channel)->
   channel.on 'message', (msg, from)->
-    regex = /http:[/][/](?:www)[.]youtube[.]com[/]watch[?]v=([A-z|0-9|-]*)/
+    regex = /https?:[/][/](?:www)[.]youtube[.]com[/]watch[?]v=([A-z|0-9|-]*)/
 
     match = msg.match regex
     if match
