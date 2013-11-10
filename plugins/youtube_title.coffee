@@ -11,7 +11,6 @@ register = (channel)->
           return
 
         json = JSON.parse body.toString()
-        console.log 'json',json
         title = json.entry.title.$t
         channel.send "YouTube: #{title}"
 module.exports =  register: register
