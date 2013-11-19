@@ -12,6 +12,7 @@ sjp       = require './plugins/sjp'
 btc       = require './plugins/btc'
 mario     = require './plugins/mario'
 headers   = require './plugins/headers'
+forex     = require './plugins/forex'
 
 http      = require 'http'
 
@@ -28,6 +29,7 @@ register_plugins = (channel)->
   bash.register channel
   mario.register channel
   headers.register channel
+  forex.register channel
 
   channel.on 'message', (msg, from)->
 
