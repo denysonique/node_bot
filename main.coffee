@@ -77,6 +77,7 @@ server.connect()
 server.on 'ready', ->
   server.join '#node.js-pl', register_plugins
   server.join '#gentoo-pl', register_plugins
+  server.join '#ubuntu-pl', register_plugins
   server.join '#irctesting', register_plugins
 
 module.exports = server
