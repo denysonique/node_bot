@@ -69,7 +69,7 @@ register_plugins = (channel)->
 if process.env.NODE_ENV == 'development'
   host = 'localhost'
 else
-  host = 'irc.freenode.net'
+  host = 'holmes.freenode.net'
 
 server = new Server nick: 'node_bot', server: host
 
