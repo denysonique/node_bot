@@ -22,7 +22,7 @@ http.createServer((req, res)-> res.end()).listen process.env.PORT || 5000
 #TODO clear register_plugins mess
 
 register_plugins = (channel)->
-  youtube.register channel
+  youtube.register channel unless channel.name == '#gentoo-pl'
   sjp.register channel
   btc.register channel unless channel.name == '#gentoo-pl'
   rofl.register channel
