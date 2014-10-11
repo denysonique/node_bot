@@ -10,6 +10,12 @@ pogoda = (city, cb)->
   url = "http://pogoda.interia.pl/suggest/geo?s=#{city}&limit=11&timestamp=#{Date.now()}"
   r.get url, (err, res, body)->
     res = JSON.parse body.toString()
+
+    if res.items.length < 1
+      console.log 'items is empty'
+      cb "Nieznana lokalizacja '#{city}'"
+      return
+
     id = res.items[0].id
     r.get "http://pogoda.interia.pl/,cId,#{id}", (err, res, body)->
 
