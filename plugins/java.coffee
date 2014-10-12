@@ -7,7 +7,9 @@ delay = (ms,cb)-> setTimeout cb, ms
 
 java = (cb)->
   r.get "http://java-0day.com", (err, res, body)->
+    console.log err if err
     if err || res.statusCode != 200
+      cb res.statusCode
       cb 'dupa'
       return
 
@@ -26,18 +28,18 @@ java = (cb)->
     r.get "http://istherejava0day.com/", (err, res, body)->
       $ = cheerio.load body.toString()
       still_threat = $('#answer').text().trim()
-      console.log 'st', still_threat
 
+      patched = ''
       switch still_threat
         when 'YES'
           patched = 'No'
         when 'NO'
           patched = 'Yes'
-        else
-          cb "dupa"
-          return
 
-      cb "#{days} days since last known Java 0-day exploit. Patched: #{patched}. — http://java-0day.com"
+      out = "#{days} days since last known Java 0-day exploit"
+      out += " Patched: #{patched}" if patched.length
+      out += " — http://java-0day.com"
+      cb out
 
 
 
