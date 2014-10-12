@@ -1,24 +1,6 @@
 net            = require 'net'
 {EventEmitter} = require 'events'
-
-class Channel extends EventEmitter
-  constructor: (@name, @server)->
-    @server.socket.on 'line', (data)=>
-      data = data.toString()
-
-      regex = new RegExp ":\(.*\)!.* PRIVMSG #{@name} :\(.*\)"
-      privmsg = data.match regex
-
-
-      if privmsg
-        @emit 'message', privmsg[2], privmsg[1]
-
-    @server.on 'ping', (str)=>
-      @server.socket.writeln "PONG #{str}"
-
-  send: (msg)=>
-    @server.socket.writeln "PRIVMSG #{@name} :#{msg}"
-
+Channel        = require './channel'
 
 class Server extends EventEmitter
 
@@ -87,8 +69,8 @@ class Server extends EventEmitter
   whois: (nick, cb)=>
     @socket.writeln "WHOIS #{nick}"
     @on 'whois', cback = (res)->
-      if res.nick == nick
+      if res.nick.trim() == nick.trim()
         cb res
         @removeListener 'whois', cback
 
-module.exports = Server: Server
+module.exports = Server
