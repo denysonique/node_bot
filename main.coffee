@@ -13,6 +13,7 @@ btc       = require './plugins/btc'
 mario     = require './plugins/mario'
 headers   = require './plugins/headers'
 forex     = require './plugins/forex'
+github    = require './plugins/github.coffee'
 
 http      = require 'http'
 
@@ -30,6 +31,7 @@ register_plugins = (channel)->
   mario.register channel
   headers.register channel
   forex.register channel
+  github.register channel
 
   channel.on 'message', (msg, from)->
 
