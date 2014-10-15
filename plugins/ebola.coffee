@@ -56,11 +56,10 @@ execute = (args, cb)->
         out = "Ebola by country ⇛ "
 
         _(cases.by_country).each (values, country)->
-          out += "#{country} ❱❱ ☣ #{values.cases} ☠ #{values.deaths} | "
+          out += "#{country} ❱❱ ☣ #{values.cases} ☠ #{values.deaths} |"
         cb out
 
     else
-
       cb "Ebola cases worldwide ⇛ Total: ☣ #{cases['total']}, Deaths: ☠ #{cases['deaths']}"
 
 
