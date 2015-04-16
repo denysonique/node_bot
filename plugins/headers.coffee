@@ -9,7 +9,7 @@ execute = (url, cb)->
 
   r.get url, (err, res, body)->
     if err
-      cb err
+      cb [err.toString()]
       return
 
     res_array = []
