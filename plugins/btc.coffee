@@ -6,17 +6,16 @@ r = r.defaults followAllRedirects: true
 execute = (cb)->
 
   opts =
-    url: 'https://api.exchange.coinbase.com/products/BTC-USD/stats'
+    url: 'https://bitstar.pl/api/ticker/?additional_currency=BTC&base_currency=PLN'
     headers:
       'user-agent': 'NodeJS'
 
   r.get opts, (err, res, body)->
     json = JSON.parse body
     open = json.open
-    high = json.high
-    low  = json.low
-    volume = json.volume
-    cb "Coinbase, 1 BTC = *USD* Open: #{open}, High: #{high}, Low: #{low}, Volume: #{volume}"
+    high = json.min
+    low  = json.max
+    cb "bitstar, 1 BTC = *USD* Open: #{open}, High: #{high}, Low: #{low}"
 
 register = (channel)->
   channel.on 'message', (msg, from)->
