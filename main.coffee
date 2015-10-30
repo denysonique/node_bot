@@ -10,6 +10,7 @@ rofl      = require './plugins/roflcopter.coffee'
 youtube   = require './plugins/youtube_title.coffee'
 sjp       = require './plugins/sjp'
 btc       = require './plugins/btc'
+btcpl     = require './plugins/btcpl'
 mario     = require './plugins/mario'
 headers   = require './plugins/headers'
 forex     = require './plugins/forex'
@@ -27,6 +28,7 @@ register_plugins = (channel)->
   youtube.register channel unless channel.name == '#gentoo-pl'
   sjp.register channel
   btc.register channel
+  btcpl.register channel
   rofl.register channel
   bash.register channel
   mario.register channel
