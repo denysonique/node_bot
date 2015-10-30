@@ -26,7 +26,7 @@ http.createServer((req, res)-> res.end()).listen process.env.PORT || 5000
 register_plugins = (channel)->
   youtube.register channel unless channel.name == '#gentoo-pl'
   sjp.register channel
-  btc.register channel unless channel.name == '#gentoo-pl'
+  btc.register channel
   rofl.register channel
   bash.register channel
   mario.register channel
