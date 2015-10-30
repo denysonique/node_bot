@@ -5,12 +5,18 @@ r = r.defaults followAllRedirects: true
 
 execute = (cb)->
 
-  r.get 'https://data.mtgox.com/api/1/BTCUSD/ticker', (err, res, body)->
+  opts =
+    url: 'https://api.exchange.coinbase.com/products/BTC-USD/stats'
+    headers:
+      'user-agent': 'NodeJS'
+
+  r.get opts, (err, res, body)->
     json = JSON.parse body
-    last = json.return.last.value
-    high = json.return.high.value
-    low  = json.return.low.value
-    cb "MTGox, 1 BTC = *USD* Last: #{last}, High: #{high}, Low: #{low}"
+    open = json.open
+    high = json.high
+    low  = json.low
+    volume = json.volume
+    cb "Coinbase, 1 BTC = *USD* Open: #{open}, High: #{high}, Low: #{low}, Volume: #{volume}"
 
 register = (channel)->
   channel.on 'message', (msg, from)->
