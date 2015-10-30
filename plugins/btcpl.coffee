@@ -6,15 +6,18 @@ r = r.defaults followAllRedirects: true
 execute = (cb)->
 
   opts =
-    url: 'https://bitstar.pl/api/ticker/?additional_currency=BTC&base_currency=PLN'
+    url: 'http://bitstar.pl/api/ticker/?additional_currency=BTC&base_currency=PLN'
+    strictSSL: false
     headers:
       'user-agent': 'NodeJS'
 
   r.get opts, (err, res, body)->
+    console.log 'err', err if err
+    console.log 'body', body
     json = JSON.parse body
-    open = json.open
-    high = json.max
-    low  = json.min
+    open = json.result.open
+    high = json.result.max
+    low  = json.result.min
     cb "bitstar, 1 BTC = *PLN* Open: #{open}, High: #{high}, Low: #{low}"
 
 register = (channel)->
