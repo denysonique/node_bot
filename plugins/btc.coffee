@@ -21,7 +21,7 @@ execute = (cb)->
 register = (channel)->
   channel.on 'message', (msg, from)->
 
-    match = msg.match /^;btc/
+    match = msg.match /^;btc$/
     if match
       execute (res)->
           channel.send "#{from}: #{res}"
